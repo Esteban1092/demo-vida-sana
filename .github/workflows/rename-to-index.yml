@@ -1,0 +1,18 @@
+name: Rename demo to index
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  rename:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Rename demo-vida-sana.html to index.html
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          if [ -f index.html ]; then rm index.html; fi
+          git mv demo-vida-sana.html index.html
+          git commit -m "Rename demo-vida-sana.html to index.html"
+          git push
